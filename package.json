@@ -1,0 +1,19 @@
+{
+  "name": "wk2codechallenge-",
+  "version": "1.0.0",
+  "description": "wk 2 code challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/regular-meet-8/wk2codechallenge-.git"
+  },
+  "author": "Edson Kimotho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/regular-meet-8/wk2codechallenge-/issues"
+  },
+  "homepage": "https://github.com/regular-meet-8/wk2codechallenge-#readme"
+}
