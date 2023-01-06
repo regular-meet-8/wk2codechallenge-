@@ -1,45 +1,97 @@
-function fetchAnimals(){
-    fetch(`http://localhost:3000/characters`)
-    .then(res => res.json())
-    .then(data => renderAnimals(data));
-}
-function renderAnimals(data){
-    const ul = document.getElementById('animals')
-    const div = document.getElementById('card')
-    data.forEach(animal => {
-        const li = document.createElement('li')
-        li.innerHTML = animal.name;
-        const animalCard = document.createElement('div');
-        animalCard.classList.add('animal-card');
-        animalCard.innerHTML = `
-            <img src="${animal.image}"/>
-            <h2>${animal.name}</h2>
-        `;
-        // Create votes tally element
-        const votes = document.createElement('div');
-        votes.innerHTML = `Votes: ${animal.votes}`;
-        // Append votes to animaCard
-        animalCard.appendChild(votes);
-        // Create a button for voting 
-        const btn = document.createElement('button');
-        btn.textContent = "VOTE"
-        // Add an event listener to the button to increment number of votes
-        btn.addEventListener('click', () => {
-            votes.innerText = `Votes: ${parseInt(votes.innerText.split(': ')[1]) + 1}`;
+let content = document.getElementById("content");
+
+let nameElement 
+let cardElement
+let imgElement
+let voteElement 
+let buttonElement 
+
+function getNames(){
+    fetch("http://localhost:3000/characters")
+        .then(function(response){
+            console.log(response)
+            return response.json();
         })
-        // Append button to the animalCard
-        animalCard.appendChild(btn)
-        li.addEventListener('click', () => {
-            div.innerText=""
-            div.appendChild(animalCard);
-             // Check if the animalCard has the "active" class
-             if (!animalCard.classList.contains('active')) {
-              // If it does not, add the "active" class and append the animalCard to the li element
-              animalCard.classList.add('active');  
-              div.appendChild(animalCard);
-            }
-        });
-        ul.appendChild(li);
-    });  
+        .then(function(data){
+            data.forEach(animal => {
+               nameElement = document.createElement("h3")
+               cardElement = document.createElement("div")
+               imgElement = document.createElement("img")
+               voteElement = document.createElement("p")
+                content.appendChild(cardElement)
+                cardElement.appendChild(nameElement)
+                cardElement.setAttribute("onClick", `getAnimalById(${animal.id});`)
+                nameElement.innerHTML = animal.name 
+                //adding the class name
+                cardElement.classList.add("card")
+                
+
+               
+                
+               
+                
+            });
+        })
+    }
+    const getAnimalById = (id) => {
+    
+        console.log(window.location.pathname)
+        sessionStorage.setItem("id", id);
+        window.location.href = `http://127.0.0.1:5500/details.html`;
+        }
+        console.log(window.location.pathname)
+    if(window.location.pathname == "/"){
+      getNames()
+    }else if(window.location.pathname == "/details.html"){
+      let details = document.getElementById("details");
+      function getDetails(){
+        var id =sessionStorage.getItem("id");
+        fetch( `http://localhost:3000/characters/${id}`)
+        .then(function(response){
+            console.log(response)
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data)
+            nameElement = document.createElement("h3")
+            cardElement = document.createElement("div")
+            imgElement = document.createElement("img")
+            voteElement = document.createElement("p")
+            buttonElement = document.createElement("button")
+             details.appendChild(cardElement)
+             cardElement.appendChild(nameElement)
+             cardElement.appendChild(imgElement)
+             cardElement.appendChild(voteElement)
+             cardElement.appendChild(buttonElement)
+             cardElement.setAttribute("onClick", `getAnimalById(${data.id});`)
+             nameElement.innerHTML = data.name 
+             //adding the class name
+             cardElement.classList.add("card")
+             imgElement.src = data.image
+             voteElement.innerHTML =`Votes: ${data.votes}`
+            buttonElement.innerHTML = "Vote";
+            buttonElement.setAttribute("onClick", `updateVotes(${data.id},${data.votes});`)
+            
+          
+             
+             
+        })
+    }
+    getDetails()
+    
+    function updateVotes(id, votes){
+        var newVote=votes+1
+        fetch(`http://localhost:3000/characters/${id}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+              votes: votes +1,
+            }),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((json) => console.log(json));
+          
+    }
 }
-fetchAnimals(); (edited) 
