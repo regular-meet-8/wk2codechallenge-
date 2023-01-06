@@ -27,12 +27,7 @@ To use this repo on your machine requires some simple steps
 
 # Running the application
 Running the application is very straight forward. Unse the following steps to run the app.
-- Install required dependencies from npm
-      npm install
-- Run the application on terminal
-      npm start
-- Run on the browser
-      npm run serve
+- Run on the browser using the following link(https://serene-kulfi-287800.netlify.app/)
 
 # Authors
 This project was contributed to by:
