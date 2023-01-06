@@ -27,7 +27,9 @@ To use this repo on your machine requires some simple steps
 
 # Running the application
 Running the application is very straight forward. Unse the following steps to run the app.
-- Run on the browser using the following link(https://velvety-creponne-db5a46.netlify.app/)
+- Install required dependencies from npm npm install
+Run the application on terminal npm start
+Run on the browser npm run serve
 
 # Authors
 This project was contributed to by:
