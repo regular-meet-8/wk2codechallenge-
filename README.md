@@ -27,7 +27,7 @@ To use this repo on your machine requires some simple steps
 
 # Running the application
 Running the application is very straight forward. Unse the following steps to run the app.
-- Run on the browser using the following link(https://serene-kulfi-287800.netlify.app/)
+- Run on the browser using the following link(https://velvety-creponne-db5a46.netlify.app/)
 
 # Authors
 This project was contributed to by:
